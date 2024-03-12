@@ -1,0 +1,38 @@
+.app {
+    width: 90%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.searchBar {
+    margin: 20px;
+    width: 80%;
+    text-align: center;
+    background-color: aqua;
+    border: 3px solid black;
+}
+
+.searchResults {
+    margin: 20px;
+width: 40%;
+border: 3px solid black;
+}
+
+.playList {
+    margin: 20px;
+    border: 3px solid black;
+    width: 40%;
+}
+
+.trackList {
+    margin: 20px;
+    border: 3px solid black;
+}
+
+.track {
+    margin: 20px;
+    border: 3px solid black;
+}
