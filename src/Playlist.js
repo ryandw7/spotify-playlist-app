@@ -1,8 +1,14 @@
 import React from 'react';
 import styles from './App.module.css';
-
-export default function Playlist(){
+import Track from './Track';
+export default function Playlist({ playList }){
     return (
-        <div className={styles.playList}>I am the playlist</div>
+        <div className={styles.playList}>
+            <input type="text" name="playlistName" placeholder="Playlist Name" />
+            <button type="submit">Save</button>
+            {playList.map((track)=>{
+               return <Track track={track}/>
+            })}
+        </div>
     )
 }
