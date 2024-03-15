@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Playlist from './Playlist';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import styles from './App.module.css';
 import { testTracks } from './testTracks.js';
 let validTracks = [];
-function renderTracks(search){
-  for(const track in testTracks){
-    if(search === track.name || track.album || track.artist){
-    validTracks.push(track);
-    console.log(validTracks)
-    }else{
-      console.log(track.name)
-    }
-  }
-  
-}
+
 function App() {
   const [currentSearch, setCurrentSearch] = useState('');
   const newSearch = (value) => {
     setCurrentSearch(value);
-    renderTracks(currentSearch);
-    console.log(testTracks);
   }
 
+  useEffect(()=>{
+    renderTracks(currentSearch);
+  }, [currentSearch])
+
+  const renderTracks = (search) => {
+    for(const track in testTracks){
+      if(search === testTracks[track].name || search === testTracks[track].album || search === testTracks[track].artist){
+      validTracks.push(testTracks[track]);
+      
+      }
+    }
+    console.log(validTracks)
+  }
   return (
    
     <div className={styles.app}>
