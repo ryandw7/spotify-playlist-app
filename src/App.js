@@ -4,32 +4,36 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import styles from './App.module.css';
 import { testTracks } from './testTracks.js';
-let validTracks = [];
+
 
 function App() {
   const [currentSearch, setCurrentSearch] = useState('');
   const newSearch = (value) => {
     setCurrentSearch(value);
   }
-
+ const [validTracks, setValidTracks] = useState([])
   useEffect(()=>{
+    setValidTracks([]);
     renderTracks(currentSearch);
+    //eslint-disable-next-line
   }, [currentSearch])
-
+ useEffect(()=>{
+  console.log(validTracks)
+ }, [validTracks])
   const renderTracks = (search) => {
     for(const track in testTracks){
       if(search === testTracks[track].name || search === testTracks[track].album || search === testTracks[track].artist){
-      validTracks.push(testTracks[track]);
+      setValidTracks((prev) => [...prev, testTracks[track]]);
       
       }
     }
-    console.log(validTracks)
+    
   }
   return (
    
     <div className={styles.app}>
     <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch}/>
-    <SearchResults currentSearch={currentSearch}/>
+    <SearchResults currentSearch={currentSearch} validTracks={validTracks}/>
     <Playlist />
     </div>
   );

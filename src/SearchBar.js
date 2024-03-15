@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './App.module.css'
-export default function SearchBar({ newSearch, currentSearch }) {
+export default function SearchBar({ newSearch }) {
     const [text, setText] = useState('');
     const handleChange = ({ target }) => {
     setText(target.value);
