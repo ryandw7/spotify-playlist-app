@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './App.module.css';
 import TrackList from './TrackList';
-
-export default function SearchResults() {
+export default function SearchResults({currentSearch}) {
+    
     return (
         <div className={styles.searchResults}>
-            <h2>I am the search results</h2>
+            {currentSearch !== '' && <h2>Results for {currentSearch}</h2>}
             <TrackList />
         </div>
     )
