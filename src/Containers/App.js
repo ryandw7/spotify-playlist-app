@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Playlist from './Playlist';
-import SearchBar from './SearchBar';
-import SearchResults from './SearchResults';
-import styles from './App.module.css';
-import { testTracks } from './testTracks.js';
+import Playlist from '../Playlist.js';
+import SearchBar from '../SearchBar.js';
+import SearchResults from '../SearchResults.js';
+import styles from '../App.module.css';
+import { testTracks } from '../testTracks.js';
 
 
 function App() {
@@ -27,30 +27,37 @@ function App() {
     for (const track in testTracks) {
       if (search === testTracks[track].name || search === testTracks[track].album || search === testTracks[track].artist) {
         setValidTracks((prev) => [...prev, testTracks[track]]);
-
       }
     }
 
   }
 
-  //Logic to add tracks to playlist
+//tracks added to playlist
   const [playList, setPlayList] = useState([]);
+  //Logic to add tracks to playlist
   const addPlayListTrack = (track) => {
-    setPlayList((prev) => {return prev = [...prev, { name: track.name, artist: track.artist, album: track.album, id: track.id }]})
+    const newTrack = validTracks.filter((item)=> item.id === track.id);
+    
+    setPlayList((prev) => [...prev, newTrack[0]]);
+    console.log(playList)
   }
 
+  //Logic to remove tracks from play list
   const removePlayListTrack = (track) => {
-    setPlayList((prev) => {
-      prev = prev.filter((item) => item !== track)
-    })
+    const newTracks = playList.filter((item)=> item.id !== track.id);
+    setPlayList(newTracks);
+    console.log(playList)
   }
 
+  //PLAYLIST NAME
+  const [name, setName] = useState('Playlist');
+  
   return (
 
     <div className={styles.app}>
       <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
       <SearchResults currentSearch={currentSearch} validTracks={validTracks} addPlayListTrack={addPlayListTrack}/>
-      <Playlist removePlayListTrack={removePlayListTrack} playList={playList}/>
+      <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name}/>
     </div>
   );
 }
