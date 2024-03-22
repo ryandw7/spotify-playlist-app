@@ -3,14 +3,16 @@ import Playlist from '../Playlist.js';
 import SearchBar from '../SearchBar.js';
 import SearchResults from '../SearchResults.js';
 import styles from '../App.module.css';
-import { testTracks } from '../testTracks.js';
-
+import data from '../testTracks.json';
+import authFlow from '../calls.js';
 
 function App() {
+  const testTracks = data;
   //Recieve search value from search bar after submit is pressed;
   const [currentSearch, setCurrentSearch] = useState('');
   const newSearch = (value) => {
     setCurrentSearch(value);
+    authFlow()
   }
 
   //Filter through test track and return correlated tracks
@@ -32,12 +34,12 @@ function App() {
 
   }
 
+
 //tracks added to playlist
   const [playList, setPlayList] = useState([]);
   //Logic to add tracks to playlist
   const addPlayListTrack = (track) => {
     const newTrack = validTracks.filter((item)=> item.id === track.id);
-    
     setPlayList((prev) => [...prev, newTrack[0]]);
     console.log(playList)
   }
