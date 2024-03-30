@@ -4,9 +4,8 @@ import SearchBar from '../SearchBar.js';
 import SearchResults from '../SearchResults.js';
 import styles from '../App.module.css';
 import data from '../testTracks.json';
-import authFlow from '../calls.js';
 import axios from 'axios';
-import Authorization from './Authorization.js'
+import Authorization from './Auth/Authorization.js'
 function App() {
 
   //store access token for api calls
@@ -21,14 +20,14 @@ function App() {
       window.location.hash = "";
       window.localStorage.setItem("token", token);
       window.localStorage.setItem("authorized", true);
-      setIsAuth(true)
     }
 
     setToken(token);
     console.log(token)
-  })
+  }, [])
 
   const searchArtists = async (e) => {
+    if(currentSearch){
     const { data } = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`
@@ -42,13 +41,12 @@ function App() {
     //setArtists(data.artists.items);
     //console.log(artists);
 
-
+  }
   }
 
 
 
   //Check authorization status
-  const [isAuth, setIsAuth] = useState(false);
 
   const testTracks = data;
   //Recieve search value from search bar after submit is pressed;
@@ -63,7 +61,8 @@ function App() {
   useEffect(() => {
     setValidTracks([]);
     renderTracks(currentSearch);
-    //eslint-disable-next-line
+    searchArtists();
+    // eslint-disable-next-line
   }, [currentSearch])
 
   const renderTracks = (search) => {
@@ -96,6 +95,10 @@ function App() {
   //PLAYLIST NAME
   const [name, setName] = useState('Playlist');
 
+
+  useEffect(()=>{
+   
+  }, [currentSearch])
   return (
     <div>
       {window.localStorage.getItem("authorized") ?
