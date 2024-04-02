@@ -1,5 +1,8 @@
 .playList {
-    margin: 20px;
+    display: inline-block;
+    background-color: aliceblue;
+    overflow-y: scroll;
     border: 3px solid black;
-    width: 40%;
+    width: 35%;
+    height: 70%;
 }

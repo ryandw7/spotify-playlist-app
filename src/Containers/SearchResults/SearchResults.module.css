@@ -1,6 +1,9 @@
 
 .searchResults {
-    margin: 20px;
-width: 40%;
+    display: inline-block;
+width: 35%;
 border: 3px solid black;
+background-color: aliceblue;
+height: 70%;
+overflow-y: scroll;
 }
