@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import Playlist from '../Playlist.js';
-import SearchBar from '../SearchBar.js';
-import SearchResults from '../SearchResults.js';
-import styles from '../App.module.css';
-import data from '../testTracks.json';
+import Playlist from '../Playlist/Playlist.js';
+import SearchBar from '../../Components/Search/SearchBar.js';
+import SearchResults from '../SearchResults/SearchResults.js';
+import styles from './App.module.css';
 import axios from 'axios';
-import Authorization from './Auth/Authorization.js'
+import Authorization from '../../Auth/Authorization.js'
+
+
 function App() {
 
   //store access token for api calls
   const [token, setToken] = useState('');
+
+  //Check for auth token on first render, set local storage
   useEffect(() => {
-    const hash = window.location.hash
-    let token = window.localStorage.getItem("token")
-
+    const hash = window.location.hash;
+    let token = window.localStorage.getItem("token");
     if (!token && hash) {
-      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
+      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
       window.location.hash = "";
       window.localStorage.setItem("token", token);
       window.localStorage.setItem("authorized", true);
     }
-
     setToken(token);
-    console.log(token)
   }, [])
 
-  const searchArtists = async (e) => {
+
+  //Fetch results on search click
+  const fetchResults = async () => {
     if(currentSearch){
     const { data } = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
@@ -42,12 +43,7 @@ function App() {
   }
   }
 
-
-
-  //Check authorization status
-
-  const testTracks = data;
-  //Recieve search value from search bar after submit is pressed;
+  //Recieve search value from search bar after submit is pressed
   const [currentSearch, setCurrentSearch] = useState('');
   const newSearch = (value) => {
     setCurrentSearch(value);
@@ -57,23 +53,10 @@ function App() {
   const [validTracks, setValidTracks] = useState([]);
   //Rerender results when search is pressed 
   useEffect(() => {
- 
-    console.log(validTracks[0])
-    //setValidTracks([]);
-    //renderTracks(currentSearch);
-    searchArtists();
+    setValidTracks([]);
+    fetchResults();
     // eslint-disable-next-line
-  }, [currentSearch])
-
-  /* const renderTracks = (search) => {
-    for (const track in testTracks) {
-      if (search === testTracks[track].name || search === testTracks[track].album || search === testTracks[track].artist) {
-        setValidTracks((prev) => [...prev, testTracks[track]]);
-      }
-    } }*/
-
-  
-
+  }, [currentSearch]);
 
   //tracks added to playlist
   const [playList, setPlayList] = useState([]);
@@ -89,16 +72,11 @@ function App() {
   const removePlayListTrack = (track) => {
     const newTracks = playList.filter((item) => item.id !== track.id);
     setPlayList(newTracks);
-    console.log(playList)
   }
 
   //PLAYLIST NAME
   const [name, setName] = useState('Playlist');
 
-
-  useEffect(()=>{
-   
-  }, [currentSearch])
   return (
     <div>
       {window.localStorage.getItem("authorized") ?

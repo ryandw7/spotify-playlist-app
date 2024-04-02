@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './App.module.css';
-import Track from './Track'
+import styles from './SearchResults.module.css';
+import Track from '../../Components/Track/Track'
 export default function SearchResults({currentSearch, validTracks, addPlayListTrack}) {
     
     return (

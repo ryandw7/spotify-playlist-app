@@ -1,5 +1,5 @@
 import React from 'react';
-import authFlow from '../../calls';
+import authFlow from './authFlow';
 import styles from './Auth.module.css'
 export default function Authorization(){
     const url = authFlow();

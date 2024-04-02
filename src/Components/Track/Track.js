@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.module.css';
+import styles from './Track.module.css';
 
 export default function Track({track, handleClick, text}){
    const childClickHandler = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from './App.module.css';
-import Track from './Track'
+import styles from './Playlist.module.css';
+import Track from '../../Components/Track/Track'
 
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);

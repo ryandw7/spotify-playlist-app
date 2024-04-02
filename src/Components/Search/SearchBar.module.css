@@ -1,0 +1,7 @@
+.searchBar {
+    margin: 20px;
+    width: 80%;
+    text-align: center;
+    background-color: aqua;
+    border: 3px solid black;
+}
