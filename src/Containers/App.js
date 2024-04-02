@@ -37,10 +37,8 @@ function App() {
         type: "track"
       }
     })
-    console.log(data.tracks.items)
-    //setArtists(data.artists.items);
-    //console.log(artists);
-
+    const tracks = data.tracks.items;
+    setValidTracks(tracks);
   }
   }
 
@@ -59,20 +57,22 @@ function App() {
   const [validTracks, setValidTracks] = useState([]);
   //Rerender results when search is pressed 
   useEffect(() => {
-    setValidTracks([]);
-    renderTracks(currentSearch);
+ 
+    console.log(validTracks[0])
+    //setValidTracks([]);
+    //renderTracks(currentSearch);
     searchArtists();
     // eslint-disable-next-line
   }, [currentSearch])
 
-  const renderTracks = (search) => {
+  /* const renderTracks = (search) => {
     for (const track in testTracks) {
       if (search === testTracks[track].name || search === testTracks[track].album || search === testTracks[track].artist) {
         setValidTracks((prev) => [...prev, testTracks[track]]);
       }
-    }
+    } }*/
 
-  }
+  
 
 
   //tracks added to playlist
