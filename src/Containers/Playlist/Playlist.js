@@ -74,7 +74,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                     :
                     <div className={styles.playListTitle}>
                         <h2>{name}</h2>
-                        <button onClick={handleClick}><FontAwesomeIcon icon={faHouse} /></button>
+                        <button onClick={handleClick}>EDIT</button>
                     </div>
                    
                 }
