@@ -6,7 +6,7 @@ import styles from './App.module.css';
 import axios from 'axios';
 import Authorization from '../../Auth/Authorization.js'
 
-
+// https://api.spotify.com/v1/me
 function App() {
 
   //store access token for api calls

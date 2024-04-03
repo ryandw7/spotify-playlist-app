@@ -1,9 +1,45 @@
-
 .searchResults {
     display: inline-block;
-width: 35%;
-border: 3px solid black;
-background-color: aliceblue;
-height: 70%;
-overflow-y: scroll;
+    background-color: aliceblue;
+    overflow-y: scroll;
+    border: 3px solid black;
+    width: 35%;
+    height: 70%;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-top: 50px;
+    margin-right: 20px;
+}
+.searchResults::-webkit-scrollbar {
+    display: block;
+    background-color: greenyellow;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin-top: 20px;
+  }
+
+  /* Track */
+.searchResults::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .searchResults::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px; 
+}
+
+.searchResults::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
+}
+
+  
+  /* Handle */
+  .searchResults::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+.searchResults {
+    text-align: center;
 }

@@ -6,7 +6,7 @@ export default function SearchResults({currentSearch, validTracks, addPlayListTr
     return (
         <div className={styles.searchResults}>
             {currentSearch !== '' && <h2>Results for {currentSearch}</h2>}
-            {validTracks.map((track)=><Track track={track} key={`ResultList_${track.id}`} handleClick={addPlayListTrack} text={'Add'}/>)}
+            {validTracks.map((track)=><Track track={track} key={`ResultList_${track.id}`} handleClick={addPlayListTrack} text={'+'}/>)}
         </div>
     )
 }
