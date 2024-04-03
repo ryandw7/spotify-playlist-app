@@ -1,44 +1,31 @@
 .playList {
-    display: inline-block;
-    background-color: aliceblue;
-    overflow-y: scroll;
-    border: 3px solid black;
-    width: 35%;
-    height: 70%;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding-top: 50px;
-    margin-right: 20px;
-}
-.playList::-webkit-scrollbar {
-    display: block;
-    background-color: greenyellow;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-  }
+height: 80%;
+width: 40%;
 
-  /* Track */
-.playList::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  .playList::-webkit-scrollbar-track-piece:end {
-    background: transparent;
-    margin-bottom: 30px; 
 }
 
-.playList::-webkit-scrollbar-track-piece:start {
-    background: transparent;
-    margin-top: 30px;
+
+.playListTitle {
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-width: 100%;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
-  
-  /* Handle */
-  .playList::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-.name {
-    text-align: center;
+.playListTitle h2 {
+  width: fit-content;
+  margin-right: 10px;
+}
+.playListTracks {
+  height: 55%;
+   width: 100%;
+   background-color: white;
+}
+
+.playListButton {
+  top: 20px;
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Playlist.module.css';
 import Track from '../../Components/Track/Track'
-
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);
     const retrieveID = async () => {
@@ -39,8 +38,8 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
         const res = await fetch(url, {
             method: "POST",
             body: JSON.stringify({
-                    "uris": playListURIs,
-                    "position": 0,
+                "uris": playListURIs,
+                "position": 0,
             }),
             headers: {
                 Authorization: `Bearer ${window.localStorage.getItem("token")}`,
@@ -66,19 +65,25 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
     }
     return (
         <div className={styles.playList}>
-            {nameChange ?
-                <form onSubmit={handleSubmit} className={styles.name}>
-                    <input type="text" name="playlistName" placeholder={name} onChange={handleChange} />
-                    <button type="submit">Save</button>
-                </form>
-                :
-                <div className={styles.name}>
-                    <h2>{name}</h2>
-                    <button onClick={handleClick}>Edit</button>
-                </div>
-            }
-            {playList.map((track) => <Track track={track} key={`PlayList_${track.id}`} handleClick={removePlayListTrack} text={'x'} />)}
-            <button onClick={ADDTRACKS}>EXPORT</button>
+            <div className={styles.playListTitle}>
+                {nameChange ?
+                    <form onSubmit={handleSubmit} className={styles.playListTitle}>
+                        <input type="text" name="playlistName" placeholder={name} onChange={handleChange} />
+                        <button type="submit">Save</button>
+                    </form>
+                    :
+                    <div className={styles.playListTitle}>
+                        <h2>{name}</h2>
+                        <button onClick={handleClick}><FontAwesomeIcon icon={faHouse} /></button>
+                    </div>
+                   
+                }
+            </div>
+            <div className={styles.playListTracks}>
+                {playList.map((track) => <Track track={track} key={`PlayList_${track.id}`} handleClick={removePlayListTrack} text={'x'} />)}
+            </div>
+            <button className={styles.playListButton} onClick={ADDTRACKS}>EXPORT</button>
+
         </div>
     )
 }
