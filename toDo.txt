@@ -1,4 +1,3 @@
-
 #STYLE
 Adjust font for different screen width
 Change color layout
@@ -10,6 +9,8 @@ Add simple mobile view
 Add default playlist name
 Reload auth if token expired
 Restructure promises
+Disable scroll on desktop
+Prevent same track added twice
 
 #FEATURE
 Add lightmode/darkmode
