@@ -28,8 +28,32 @@ width: 40%;
    width: 100%;
    background-color: #364B36;
    overflow-y: scroll;
+   box-shadow: 10px 5px 5px black;
+   padding: 20px;
 }
 
-.playListButton {
-  top: 20px;
+.playListTracks::-webkit-scrollbar {
+  
+  background: none;
+}
+
+.playListTracks::-webkit-scrollbar-thumb {
+  position: absolute;
+  right: 20px;
+  background-color: #0FF510;
+  border-radius: 10px;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  font-size: 1.4vw;
+  color: white;
+}
+
+.exportButton {
+  background: none;
+  border: none;
+  font-size: 1.4vw;
+  color: white;
 }

@@ -15,14 +15,14 @@ function App() {
   //Check for auth token on first render, set local storage
   useEffect(() => {
     const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-    if (!token && hash) {
-      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
+    let accessToken = window.sessionStorage.getItem("token");
+    if (!accessToken && hash) {
+      accessToken = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
       window.location.hash = "";
-      window.localStorage.setItem("token", token);
-      window.localStorage.setItem("authorized", true);
+      window.sessionStorage.setItem("token", accessToken);
+      window.sessionStorage.setItem("authorized", true);
     }
-    setToken(token);
+    setToken(accessToken);
   }, [])
 
 
@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div>
-      {window.localStorage.getItem("authorized") ?
+      {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
           <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
           <SearchResults currentSearch={currentSearch} validTracks={validTracks} addPlayListTrack={addPlayListTrack} />

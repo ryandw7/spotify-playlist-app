@@ -17,7 +17,7 @@ export default function SearchBar({ newSearch }) {
         <div className={styles.searchBar}>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <input className={styles.input} id="search" type="text" value={text} onChange={handleChange} placeholder="Search..."/>
-                <button type="submit"><FontAwesomeIcon icon={faArrowRight} /></button>
+                <button type="submit" className={styles.searchButton}><FontAwesomeIcon icon={faArrowRight} /></button>
             </form>
         </div>
     )

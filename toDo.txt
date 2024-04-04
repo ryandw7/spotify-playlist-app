@@ -1,0 +1,17 @@
+
+#STYLE
+Adjust font for different screen width
+Change color layout
+Add page title
+Add hover transition for tracks
+Add simple mobile view
+
+#QUALITY
+Add default playlist name
+Reload auth if token expired
+Restructure promises
+
+#FEATURE
+Add lightmode/darkmode
+Add load feature to verification
+Add visual response to export request

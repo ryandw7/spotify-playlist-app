@@ -8,6 +8,7 @@
     border-radius: 50px;
     justify-content: space-between;
     align-content: center;
+    box-shadow: 10px 5px 5px black;
 }
 
 .form {
@@ -37,4 +38,18 @@
     -webkit-text-fill-color: #ffffff;
     transition: background-color 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px #364B36;
+}
+
+.searchButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8vw;
+    transition: all ease-in 1s;
+}
+
+.searchButton:hover {
+    font-size: 2vw;
+    color: #0FF510;
+    cursor: pointer;
 }

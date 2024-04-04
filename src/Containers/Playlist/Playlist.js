@@ -6,7 +6,7 @@ import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);
     const retrieveID = async () => {
-        const res = await fetch('https://api.spotify.com/v1/me?access_token=' + window.localStorage.getItem("token"))
+        const res = await fetch('https://api.spotify.com/v1/me?access_token=' + window.sessionStorage.getItem("token"))
         const data = await res.json();
         const USER_ID = data.id;
         return USER_ID;
@@ -23,7 +23,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                 "public": false
             }),
             headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
                 "Content-type": "application/json; charset=UTF-8"
             }
         });
@@ -44,7 +44,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                 "position": 0,
             }),
             headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
                 "Content-type": "application/json; charset=UTF-8"
             }
         });
@@ -71,12 +71,12 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                 {nameChange ?
                     <form onSubmit={handleSubmit} className={styles.playListTitle}>
                         <input type="text" name="playlistName" placeholder={name} onChange={handleChange} />
-                        <button type="submit"><FontAwesomeIcon icon={faCheck} /></button>
+                        <button type="submit" className={styles.editButton}><FontAwesomeIcon icon={faCheck} /></button>
                     </form>
                     :
                     <div className={styles.playListTitle}>
                         <h2>{name}</h2>
-                        <button onClick={handleClick}><FontAwesomeIcon icon={faPenToSquare} /></button>
+                        <button onClick={handleClick} className={styles.editButton}><FontAwesomeIcon icon={faPenToSquare} /></button>
                     </div>
                    
                 }
@@ -84,7 +84,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
             <div className={styles.playListTracks}>
                 {playList.map((track) => <Track track={track} key={`PlayList_${track.id}`} handleClick={removePlayListTrack} text={'x'} />)}
             </div>
-            <button className={styles.playListButton} onClick={ADDTRACKS}><FontAwesomeIcon icon={faPenToSquare} /></button>
+            <button className={styles.exportButton} onClick={ADDTRACKS}><FontAwesomeIcon icon={faPenToSquare} /></button>
 
         </div>
     )

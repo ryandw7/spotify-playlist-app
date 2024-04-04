@@ -23,4 +23,16 @@
    width: 100%;
    background-color: #364B36;
    overflow-y: scroll;
+   padding: 20px;
+}
+
+.searchResultsTracks::-webkit-scrollbar {
+  background: none;
+}
+
+.searchResultsTracks::-webkit-scrollbar-thumb {
+  position: absolute;
+  right: 20px;
+  background-color: #0FF510;
+  border-radius: 10px;
 }
