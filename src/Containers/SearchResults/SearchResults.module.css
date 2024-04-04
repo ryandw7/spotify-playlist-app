@@ -6,7 +6,7 @@
 
 .searchResultsTitle {
   color: white;
-  height: 20%;
+  height: 10%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -17,8 +17,10 @@
 }
 
 .searchResultsTracks {
-   height: 55%;
+  border-radius: 20px;
+  border: 3px solid #0FF510;
+   height: 85%;
    width: 100%;
-   background-color: white;
+   background-color: #364B36;
    overflow-y: scroll;
 }

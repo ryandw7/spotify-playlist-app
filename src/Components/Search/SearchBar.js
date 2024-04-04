@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import styles from './SearchBar.module.css'
 export default function SearchBar({ newSearch }) {
     const [text, setText] = useState('');
@@ -13,9 +15,9 @@ export default function SearchBar({ newSearch }) {
     }
     return (
         <div className={styles.searchBar}>
-            <form onSubmit={handleSubmit}>
-                <input id="search" type="text" value={text} onChange={handleChange} placeholder="Search..."/>
-                <button type="submit">Search</button>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <input className={styles.input} id="search" type="text" value={text} onChange={handleChange} placeholder="Search..."/>
+                <button type="submit"><FontAwesomeIcon icon={faArrowRight} /></button>
             </form>
         </div>
     )

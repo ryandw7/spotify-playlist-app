@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Playlist.module.css';
-import Track from '../../Components/Track/Track'
+import Track from '../../Components/Track/Track';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);
     const retrieveID = async () => {
@@ -69,12 +71,12 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                 {nameChange ?
                     <form onSubmit={handleSubmit} className={styles.playListTitle}>
                         <input type="text" name="playlistName" placeholder={name} onChange={handleChange} />
-                        <button type="submit">Save</button>
+                        <button type="submit"><FontAwesomeIcon icon={faCheck} /></button>
                     </form>
                     :
                     <div className={styles.playListTitle}>
                         <h2>{name}</h2>
-                        <button onClick={handleClick}>EDIT</button>
+                        <button onClick={handleClick}><FontAwesomeIcon icon={faPenToSquare} /></button>
                     </div>
                    
                 }
@@ -82,7 +84,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
             <div className={styles.playListTracks}>
                 {playList.map((track) => <Track track={track} key={`PlayList_${track.id}`} handleClick={removePlayListTrack} text={'x'} />)}
             </div>
-            <button className={styles.playListButton} onClick={ADDTRACKS}>EXPORT</button>
+            <button className={styles.playListButton} onClick={ADDTRACKS}><FontAwesomeIcon icon={faPenToSquare} /></button>
 
         </div>
     )
