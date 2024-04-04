@@ -5,52 +5,67 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);
+    
     const retrieveID = async () => {
-        const res = await fetch('https://api.spotify.com/v1/me?access_token=' + window.sessionStorage.getItem("token"))
-        const data = await res.json();
-        const USER_ID = data.id;
-        return USER_ID;
+        try {
+            const res = await fetch('https://api.spotify.com/v1/me?access_token=' + window.sessionStorage.getItem("token"))
+            const data = await res.json();
+            const USER_ID = data.id;
+            return USER_ID;
+        } catch (err) {
+            console.log(`ERROR: ${err}, Unable to retrieve ID`);
+        }
     }
 
     const POSTPLAYLIST = async () => {
         const userID = await retrieveID();
         const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
-        const res = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify({
-                "name": text,
-                "description": "New playlist description",
-                "public": false
-            }),
-            headers: {
-                Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
-        const data = await res.json();
-        const PLAYLIST_ID = await data.id;
-        return PLAYLIST_ID;
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    "name": text,
+                    "description": "New playlist description",
+                    "public": false
+                }),
+                headers: {
+                    Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            const data = await res.json();
+            const PLAYLIST_ID = await data.id;
+            return PLAYLIST_ID;
+        } catch (err) {
+            console.log(`ERROR: ${err}, Unable to POST Playlist`);
+        }
     }
 
     const ADDTRACKS = async () => {
         const playListID = await POSTPLAYLIST();
-        const url = `https://api.spotify.com/v1/playlists/${playListID}/tracks`
+        const url = `https://api.spotify.com/v1/playlists/${playListID}/tracks`;
         let playListURIs = playList.map(track => track.uri);
-        console.log(playListURIs)
-        const res = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify({
-                "uris": playListURIs,
-                "position": 0,
-            }),
-            headers: {
-                Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        });
 
-        console.log(res.json());
+        try {
+            console.log(playListURIs)
+            const res = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    "uris": playListURIs,
+                    "position": 0,
+                }),
+                headers: {
+                    Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            console.log(res.json());
+        } catch (err) {
+            console.log(`ERROR: ${err}: Unable to POST tracks to playlist`);
+        }
     }
+
+
     const [text, setText] = useState('')
     const handleClick = () => {
         setNameChange(true)
@@ -78,7 +93,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
                         <h2>{name}</h2>
                         <button onClick={handleClick} className={styles.editButton}><FontAwesomeIcon icon={faPenToSquare} /></button>
                     </div>
-                   
+
                 }
             </div>
             <div className={styles.playListTracks}>
