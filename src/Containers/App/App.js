@@ -3,7 +3,7 @@ import Playlist from '../Playlist/Playlist.js';
 import SearchBar from '../../Components/Search/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import styles from './App.module.css';
-import axios from 'axios';
+import fetchResults from '../../API Pipelines/fetchResults.js';
 import Authorization from '../../Auth/Authorization.js'
 
 // https://api.spotify.com/v1/me
@@ -25,24 +25,6 @@ function App() {
     setToken(accessToken);
   }, [])
 
-
-  //Fetch results on search click
-  const fetchResults = async () => {
-    if(currentSearch){
-    const { data } = await axios.get("https://api.spotify.com/v1/search", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      params: {
-        q: currentSearch,
-        type: "track"
-      }
-    })
-    const tracks = data.tracks.items;
-    setValidTracks(tracks);
-  }
-  }
-
   //Recieve search value from search bar after submit is pressed
   const [currentSearch, setCurrentSearch] = useState('');
   const newSearch = (value) => {
@@ -54,7 +36,7 @@ function App() {
   //Rerender results when search is pressed 
   useEffect(() => {
     setValidTracks([]);
-    fetchResults();
+    fetchResults(currentSearch, token, setValidTracks)
     // eslint-disable-next-line
   }, [currentSearch]);
 
