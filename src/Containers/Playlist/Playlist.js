@@ -3,7 +3,7 @@ import styles from './Playlist.module.css';
 import Track from '../../Components/Track/Track';
 import postPlaylist from '../../API Pipelines/postPlayList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faCheck, faCropSimple } from '@fortawesome/free-solid-svg-icons';
 export default function Playlist({ playList, removePlayListTrack, setName, name }) {
     const [nameChange, setNameChange] = useState(false);
 
@@ -11,14 +11,26 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
       postPlaylist(playList, text)
     }
 
-    const [text, setText] = useState('')
+    const [text, setText] = useState('Playlist')
     const handleClick = () => {
         setNameChange(true)
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        setName(text);
+        e.preventDefault();
+        const isBlank = () => {
+            const arr = text.split(' ');
+            console.log(arr);
+            for(let i = 0; i < text.length; i++){
+             if (arr[i] !== ''){
+                return false;
+             }else{
+                return true;
+             }
+            }
+        }
+        console.log(isBlank())
+        isBlank() || !text ? setName('Playlist') : setName(text);
         setNameChange(false)
     }
 

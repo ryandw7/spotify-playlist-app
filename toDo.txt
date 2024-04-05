@@ -7,8 +7,8 @@ Add simple mobile view
 
 #QUALITY
 Add default playlist name
-Reload auth if token expired
-Restructure promises
+X Reload auth if token expired - switched to sessionStorage
+X Restructure promises - move API calls to seperate modules, add Try/Catch
 Disable scroll on desktop
 Prevent same track added twice
 

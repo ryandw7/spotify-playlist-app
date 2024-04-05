@@ -11,7 +11,9 @@ const retrieveID = async () => {
 }
 
 const CREATEPLAYLIST = async (name) => {
-
+    if(name === ''){
+        let name = 'Playlist'
+    }
     const userID = await retrieveID();
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
     try {
