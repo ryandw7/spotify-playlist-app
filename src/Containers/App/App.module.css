@@ -9,6 +9,18 @@
     justify-content: space-around;
 }
 
+.duplicateAlert {
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+}
+
 
 
 

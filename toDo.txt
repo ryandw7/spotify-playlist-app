@@ -6,7 +6,7 @@ Add hover transition for tracks
 Add simple mobile view
 
 #QUALITY
-Add default playlist name
+X Add default playlist name
 X Reload auth if token expired - switched to sessionStorage
 X Restructure promises - move API calls to seperate modules, add Try/Catch
 Disable scroll on desktop

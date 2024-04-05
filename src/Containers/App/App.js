@@ -42,12 +42,31 @@ function App() {
 
   //tracks added to playlist
   const [playList, setPlayList] = useState([]);
-
+  const [duplicateTrack, setDuplicateTrack] = useState(false);
   //Logic to add tracks to playlist
   const addPlayListTrack = (track) => {
     const newTrack = validTracks.filter((item) => item.id === track.id);
-    setPlayList((prev) => [...prev, newTrack[0]]);
-    console.log(playList)
+    let isDuplicate = false;
+    for(let i = 0; i < playList.length; i++){
+      if(track.id === playList[i].id){
+        isDuplicate = true;
+      }
+    }
+    !isDuplicate ? setPlayList((prev) => [...prev, newTrack[0]]) : renderDuplicateAlert();
+  }
+
+  //handle duplicate alert element, timeout after 3 secs, doesnt stack
+  const duplicateAlert = <p className={styles.duplicateAlert}>This track is already in your playlist!</p>;
+  let alertActive = false;
+  const renderDuplicateAlert = () => {
+    if(!alertActive){
+      alertActive = true;
+      setDuplicateTrack(true);
+      setTimeout(()=>{
+        setDuplicateTrack(false);
+        alertActive = false;
+      }, 3000);
+    }
   }
 
   //Logic to remove tracks from play list
@@ -61,6 +80,7 @@ function App() {
 
   return (
     <div>
+      {duplicateTrack && duplicateAlert}
       {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
           <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
