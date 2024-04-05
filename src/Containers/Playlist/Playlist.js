@@ -7,7 +7,7 @@ import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 //Component to contain playlist tracks and update playlist name
-export default function Playlist({ playList, removePlayListTrack, setName, name }) {
+export default function Playlist({ playList, removePlayListTrack, setName, name, exportedAlert }) {
 
     //Change return if user clicks edit button
     const [nameChange, setNameChange] = useState(false);
@@ -16,8 +16,24 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
     }
 
     //Export playlist data to user spotify account
+    const exportButtonStyle = () => {
+        if(exportTimeout){
+            return styles.exportButtonTimeout;
+        }else{
+            return styles.exportButton;
+        }
+    }
+    //Prevent export from occuring more than once in a five second window, darken button to visualize feature
+    const [exportTimeout, setExportTimeout] = useState(false);
     const handleExport = () => {
-        postPlaylist(playList, text)
+        if(!exportTimeout){
+        postPlaylist(playList, text);
+        exportedAlert();
+        setExportTimeout(true);
+        setTimeout(()=>{
+            setExportTimeout(false);
+        }, 5000)
+        }
     }
 
 
@@ -64,7 +80,7 @@ export default function Playlist({ playList, removePlayListTrack, setName, name 
             <div className={styles.playListTracks}>
                 {playList.map((track) => <Track track={track} key={`PlayList_${track.id}`} handleClick={removePlayListTrack} text={'x'} />)}
             </div>
-            <button className={styles.exportButton} onClick={handleExport}><FontAwesomeIcon icon={faPenToSquare} /></button>
+            <button className={exportButtonStyle()} onClick={handleExport}><FontAwesomeIcon icon={faPenToSquare} /></button>
 
         </div>
     )

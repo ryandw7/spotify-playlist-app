@@ -10,10 +10,10 @@ X Add default playlist name
 X Reload auth if token expired - switched to sessionStorage
 X Restructure promises - move API calls to seperate modules, add Try/Catch
 Disable scroll on desktop
-Prevent same track added twice
+X Prevent same track added twice
 
 #FEATURE
 Add lightmode/darkmode
 Add load feature to verification
-Add visual response to export request
+X Add visual response to export request
 Add description Change

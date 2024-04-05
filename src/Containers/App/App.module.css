@@ -9,7 +9,7 @@
     justify-content: space-around;
 }
 
-.duplicateAlert {
+.alert {
     position: fixed;
     top: 10%;
     left: 40%;

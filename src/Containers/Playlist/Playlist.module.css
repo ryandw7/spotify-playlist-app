@@ -57,3 +57,10 @@ width: 40%;
   font-size: 1.4vw;
   color: white;
 }
+
+.exportButtonTimeout {
+  background: none;
+  border: none;
+  font-size: 1.4vw;
+  color: rgb(36, 36, 36);
+}

@@ -43,6 +43,7 @@ function App() {
   //tracks added to playlist
   const [playList, setPlayList] = useState([]);
   const [duplicateTrack, setDuplicateTrack] = useState(false);
+  const [exported, setExported] = useState(false);
   //Logic to add tracks to playlist
   const addPlayListTrack = (track) => {
     const newTrack = validTracks.filter((item) => item.id === track.id);
@@ -56,7 +57,8 @@ function App() {
   }
 
   //handle duplicate alert element, timeout after 3 secs, doesnt stack
-  const duplicateAlert = <p className={styles.duplicateAlert}>This track is already in your playlist!</p>;
+  const duplicateAlert = <p className={styles.alert}>This track is already in your playlist!</p>;
+  const exportedAlert = <p className={styles.alert}>Your playlist has been exported. Check it out on your Spotify account!</p>;
   let alertActive = false;
   const renderDuplicateAlert = () => {
     if(!alertActive){
@@ -64,6 +66,17 @@ function App() {
       setDuplicateTrack(true);
       setTimeout(()=>{
         setDuplicateTrack(false);
+        alertActive = false;
+      }, 3000);
+    }
+  }
+
+  const renderExportedAlert = () => {
+    if(!alertActive){
+      alertActive = true;
+      setExported(true);
+      setTimeout(()=>{
+        setExported(false);
         alertActive = false;
       }, 3000);
     }
@@ -81,11 +94,12 @@ function App() {
   return (
     <div>
       {duplicateTrack && duplicateAlert}
+      {exported && exportedAlert}
       {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
           <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
           <SearchResults currentSearch={currentSearch} validTracks={validTracks} addPlayListTrack={addPlayListTrack} />
-          <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name} />
+          <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name} exportedAlert={renderExportedAlert}/>
         </div>
         :
         <div>
