@@ -7,20 +7,21 @@ import fetchResults from '../../API Pipelines/fetchResults.js';
 import Authorization from '../../Auth/Authorization.js';
 import Profile from '../../Components/Profile/Profile.js';
 import { retrieveUser } from '../../API Pipelines/retrieveUser.js';
+import Title from '../../Components/Title/Title.js'
 function App() {
   //store access token for api calls
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [userImage, setUserImage] = useState('');
   const storeID = async () => {
-    console.log(userImage) 
+    console.log(userImage)
     const data = await retrieveUser();
     console.log(data);
-   /* if (data.images.length > 0){
-     setUserImage(data.images[0])
-    } */
+    if (data.images.length > 0){
+      setUserImage(data.images[0])
+     }
     setUser(data.display_name);
-  } 
+  }
   //Check for auth token on first render, set local storage
   useEffect(() => {
     const hash = window.location.hash;
@@ -35,7 +36,7 @@ function App() {
     setToken(accessToken);
     if (accessToken) {
 
-     storeID();
+      storeID();
     }
   }, [])
 
@@ -112,8 +113,11 @@ function App() {
       {exported && exportedAlert}
       {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
-          <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
-          <Profile user={user} userImage={userImage}/>
+          <div className={styles.header}>
+            <Title />
+            <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
+            <Profile user={user} userImage={userImage} />
+          </div>
           <SearchResults currentSearch={currentSearch} validTracks={validTracks} addPlayListTrack={addPlayListTrack} />
           <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name} exportedAlert={renderExportedAlert} />
         </div>
