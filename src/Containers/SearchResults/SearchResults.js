@@ -6,6 +6,7 @@ export default function SearchResults({currentSearch, validTracks, addPlayListTr
     return (
         <div className={styles.searchResults}>
             <div className={styles.searchResultsTitle}>
+                {/*eslint-disable-next-line*/}
             {currentSearch !== '' ? <h2>Results for {currentSearch}</h2> : <h2></h2>}
             </div>
             <div className={styles.searchResultsTracks}>
@@ -13,4 +14,4 @@ export default function SearchResults({currentSearch, validTracks, addPlayListTr
             </div>
         </div>
     )
-}
+};

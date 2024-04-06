@@ -7,7 +7,7 @@ export default function Profile({ user, userImage }){
             {userImage ?
              <img src={userImage.url} alt="profile" className={styles.image}/>
              :
-             <img src={defaultProfilePic} className={styles.image}/>
+             <img src={defaultProfilePic} alt="profile" className={styles.image}/>
             }
             <p className={styles.p}>{user}</p>
         </div>

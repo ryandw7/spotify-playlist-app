@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Title.module.css'
-import { toBeInTheDOM } from '@testing-library/jest-dom/dist/matchers';
 
-export default function ({ user }) {
+export default function Title({ user }) {
     const [banner, setBanner] = useState('');
     const welcome = `Welcome, ${user}!`;
     const title = 'Spotify Playlist Builder';
@@ -13,7 +12,7 @@ export default function ({ user }) {
         let arr2 = [];
         let string = '';
         for (let i = 0; i < arr1.length; i++) {
-
+            /*eslint-disable-next-line*/
             setTimeout(() => {
                 arr2.unshift(arr1[i]);
                 string = arr2.join('');
@@ -28,7 +27,9 @@ export default function ({ user }) {
         let arr = Array.from(text);
         let string;
         const time = 25 * arr.length + 1000;
+        
         for (let i = 0; i < arr.length; i++) {
+        /*eslint-disable-next-line*/
             setTimeout(() => {
                 arr.pop();
                 string = arr.join('');
@@ -53,6 +54,7 @@ export default function ({ user }) {
         if (user) {
             moveBanner()
         }
+        // eslint-disable-next-line
     }, [user])
     
 
