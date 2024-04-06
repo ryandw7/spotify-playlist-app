@@ -14,9 +14,9 @@ function App() {
   const [user, setUser] = useState('');
   const [userImage, setUserImage] = useState('');
   const storeID = async () => {
-    console.log(userImage)
+   
     const data = await retrieveUser();
-    console.log(data);
+    
     if (data.images.length > 0){
       setUserImage(data.images[0])
      }
@@ -114,7 +114,7 @@ function App() {
       {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
           <div className={styles.header}>
-            <Title />
+            <Title user={user}/>
             <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
             <Profile user={user} userImage={userImage} />
           </div>

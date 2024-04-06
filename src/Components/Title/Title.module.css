@@ -1,3 +1,9 @@
 .Title {
     color: white;
+    max-width: 10%;
+    min-width: 10%;
+    height: fit-content;
+    text-wrap: wrap;
+    margin: 10px;
+    padding: 0px;
 }
