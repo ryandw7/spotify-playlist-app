@@ -1,19 +1,19 @@
 #STYLE
-Adjust font for different screen width
-Change color layout
+? Adjust font for different screen width
+X Change color layout
 Add page title
-Add hover transition for tracks
-Add simple mobile view
+Add background image
+? Add hover transition for tracks
 
 #QUALITY
 X Add default playlist name
 X Reload auth if token expired - switched to sessionStorage
 X Restructure promises - move API calls to seperate modules, add Try/Catch
-Disable scroll on desktop
+X Disable scroll on desktop
 X Prevent same track added twice
 
 #FEATURE
-Add lightmode/darkmode
+Add Username in top right
 Add load feature to verification
 X Add visual response to export request
 Add description Change

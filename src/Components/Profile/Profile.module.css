@@ -1,0 +1,18 @@
+.Profile {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+.image {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+}
+
+.p {
+    margin-top: 0px;
+}

@@ -1,20 +1,8 @@
-const retrieveID = async () => {
-        
-    try {
-        const res = await fetch('https://api.spotify.com/v1/me?access_token=' + window.sessionStorage.getItem("token"))
-        const data = await res.json();
-        const USER_ID = data.id;
-        return USER_ID;
-    } catch (err) {
-        console.log(`ERROR: ${err}, Unable to retrieve ID`);
-    }
-}
+import { retrieveUser } from "./retrieveUser";
 
 const CREATEPLAYLIST = async (name) => {
-    if(name === ''){
-        let name = 'Playlist'
-    }
-    const userID = await retrieveID();
+    const user = await retrieveUser();
+    const userID = user.id;
     const url = `https://api.spotify.com/v1/users/${userID}/playlists`;
     try {
         const res = await fetch(url, {

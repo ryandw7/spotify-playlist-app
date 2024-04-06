@@ -4,14 +4,23 @@ import SearchBar from '../../Components/Search/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import styles from './App.module.css';
 import fetchResults from '../../API Pipelines/fetchResults.js';
-import Authorization from '../../Auth/Authorization.js'
-
-// https://api.spotify.com/v1/me
+import Authorization from '../../Auth/Authorization.js';
+import Profile from '../../Components/Profile/Profile.js';
+import { retrieveUser } from '../../API Pipelines/retrieveUser.js';
 function App() {
-
   //store access token for api calls
   const [token, setToken] = useState('');
-
+  const [user, setUser] = useState('');
+  const [userImage, setUserImage] = useState('');
+  const storeID = async () => {
+    console.log(userImage) 
+    const data = await retrieveUser();
+    console.log(data);
+   /* if (data.images.length > 0){
+     setUserImage(data.images[0])
+    } */
+    setUser(data.display_name);
+  } 
   //Check for auth token on first render, set local storage
   useEffect(() => {
     const hash = window.location.hash;
@@ -21,8 +30,13 @@ function App() {
       window.location.hash = "";
       window.sessionStorage.setItem("token", accessToken);
       window.sessionStorage.setItem("authorized", true);
+
     }
     setToken(accessToken);
+    if (accessToken) {
+
+     storeID();
+    }
   }, [])
 
   //Recieve search value from search bar after submit is pressed
@@ -48,8 +62,8 @@ function App() {
   const addPlayListTrack = (track) => {
     const newTrack = validTracks.filter((item) => item.id === track.id);
     let isDuplicate = false;
-    for(let i = 0; i < playList.length; i++){
-      if(track.id === playList[i].id){
+    for (let i = 0; i < playList.length; i++) {
+      if (track.id === playList[i].id) {
         isDuplicate = true;
       }
     }
@@ -61,10 +75,10 @@ function App() {
   const exportedAlert = <p className={styles.alert}>Your playlist has been exported. Check it out on your Spotify account!</p>;
   let alertActive = false;
   const renderDuplicateAlert = () => {
-    if(!alertActive){
+    if (!alertActive) {
       alertActive = true;
       setDuplicateTrack(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setDuplicateTrack(false);
         alertActive = false;
       }, 3000);
@@ -72,10 +86,10 @@ function App() {
   }
 
   const renderExportedAlert = () => {
-    if(!alertActive){
+    if (!alertActive) {
       alertActive = true;
       setExported(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setExported(false);
         alertActive = false;
       }, 3000);
@@ -92,14 +106,16 @@ function App() {
   const [name, setName] = useState('Playlist');
 
   return (
-    <div>
+    <div className={styles.backGround}>
+
       {duplicateTrack && duplicateAlert}
       {exported && exportedAlert}
       {window.sessionStorage.getItem("authorized") ?
         <div className={styles.app}>
           <SearchBar className={styles.searchBar} newSearch={newSearch} currentSearch={currentSearch} />
+          <Profile user={user} userImage={userImage}/>
           <SearchResults currentSearch={currentSearch} validTracks={validTracks} addPlayListTrack={addPlayListTrack} />
-          <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name} exportedAlert={renderExportedAlert}/>
+          <Playlist removePlayListTrack={removePlayListTrack} playList={playList} setName={setName} name={name} exportedAlert={renderExportedAlert} />
         </div>
         :
         <div>
